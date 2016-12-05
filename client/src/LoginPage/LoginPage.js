@@ -1,7 +1,8 @@
 import React from 'react'
 
-import './LoginPage.css'
+import {Form, FormGroup, FormControl, ControlLabel, Button, Col} from 'react-bootstrap'
 
+import './LoginPage.css'
 
 class LoginPage extends React.Component {
 
@@ -28,19 +29,19 @@ class LoginPage extends React.Component {
   render(props) {
     return (
       <div>
-        <form className="Login-form">
-          <span>
-            <label htmlFor="username">Username : </label>
-            <input type="text" id="username" name="username" value={this.state.username}
-              onChange={e => this.onChange('username', e.target.value)} />
-          </span>
-          <span>
-            <label htmlFor="password">Password : </label>
-            <input type="password" id="password" name="password" value={this.state.password}
-              onChange={e => this.onChange('password', e.target.value)} />
-          </span>
-          <input type="submit" value="Login" onClick={e => this.onSubmit(e)} />
-        </form>
+        <Form horizontal className="Login-form">
+          <FormGroup controlId="username">
+            <Col sm={2}><ControlLabel>Username</ControlLabel></Col>
+            <Col sm={10}><FormControl type="text" value={this.state.username}
+              onChange={e => this.onChange('username', e.target.value)} /></Col>
+          </FormGroup>
+          <FormGroup controlId="password">
+            <Col sm={2}><ControlLabel>Password</ControlLabel></Col>
+            <Col sm={10}><FormControl type="text" value={this.state.password}
+              onChange={e => this.onChange('password', e.target.value)} /></Col>
+          </FormGroup>
+          <Button bsStyle="primary" type="submit" onClick={e => this.onSubmit(e)}>Login</Button>
+        </Form>
       </div>
     )
   }

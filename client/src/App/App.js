@@ -1,6 +1,7 @@
 import React from 'react'
 
-import {Link} from 'react-router'
+import {Nav, NavItem} from 'react-bootstrap'
+import {IndexLinkContainer,LinkContainer} from 'react-router-bootstrap'
 
 import logo from './logo.svg'
 import './App.css'
@@ -13,10 +14,10 @@ const App = (props) => {
           <h2>Welcome to React</h2>
         </div>
         <div className="App-menu">
-          <ul>
-            <li><Link to="/">Main</Link></li>
-            <li><Link to="/login">Login</Link></li>
-          </ul>
+          <Nav bsStyle="tabs">
+            <IndexLinkContainer to="/"><NavItem>Home</NavItem></IndexLinkContainer>
+            <LinkContainer to="/login"><NavItem>Login</NavItem></LinkContainer>
+          </Nav>
         </div>
         <div className="App-content">
           {props.children}

@@ -8,12 +8,14 @@ import LoginPage from './LoginPage'
 import HomePage from './HomePage'
 
 import './index.css'
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap-theme.css';
 
 ReactDOM.render(
   <Router history={browserHistory}>
     <Route path="/" component={App}>
       <IndexRoute component={HomePage} />
-      <Route path="login" component={LoginPage} />
+      <Route path="/login" component={LoginPage} />
     </Route>
   </Router>,
   document.getElementById('root')

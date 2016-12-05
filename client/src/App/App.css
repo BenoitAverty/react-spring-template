@@ -1,7 +1,3 @@
-.App {
-  text-align: center;
-}
-
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px;
@@ -10,39 +6,23 @@
 .App-header {
   background-color: #222;
   height: 150px;
-  padding: 20px;
   color: white;
+  text-align: center;
 }
 
 .App-menu {
   background-color: #5FB3B3;
-  height: 3em;
   margin: 0;
 }
 
 .App-menu ul {
   display: flex;
-  flex-direction: row;
-  padding: 0;
-  margin: 0;
   justify-content: center;
-  align-items: center;
-  height: 100%;
-}
-
-.App-menu li {
-  list-style-type: none;
-  height: 100%;
-  margin: 0 10px;
+  padding-top: 2px;
 }
 
 .App-menu a {
-  display: flex;
-  height: 100%;
-  padding: 0 20px;
-  align-items: center;
   color: inherit;
-  text-decoration: none;
   font-weight: bold;
 }
 
