@@ -18,7 +18,9 @@ const App = (props) => {
             <li><Link to="/login">Login</Link></li>
           </ul>
         </div>
-        {props.children}
+        <div className="App-content">
+          {props.children}
+        </div>
       </div>
   );
 }
