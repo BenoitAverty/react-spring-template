@@ -2,9 +2,9 @@ import React from 'react'
 
 import {Form, FormGroup, FormControl, ControlLabel, Button, Col} from 'react-bootstrap'
 
-import './LoginPage.css'
+import './AuthPage.css'
 
-class LoginPage extends React.Component {
+class AuthPage extends React.Component {
 
   constructor() {
     super()
@@ -47,4 +47,4 @@ class LoginPage extends React.Component {
   }
 }
 
-export default LoginPage;
+export default AuthPage;
