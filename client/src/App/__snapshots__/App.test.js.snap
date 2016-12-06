@@ -1,0 +1,46 @@
+exports[`test Matches latest snapshot 1`] = `
+<div
+  className="App">
+  <div
+    className="App-header">
+    <img
+      alt="logo"
+      className="App-logo"
+      src="test-file-stub" />
+    <h2>
+      Welcome to React
+    </h2>
+  </div>
+  <div
+    className="App-menu">
+    <Nav
+      bsClass="nav"
+      bsStyle="tabs"
+      justified={false}
+      pullLeft={false}
+      pullRight={false}
+      stacked={false}>
+      <IndexLinkContainer
+        to="/">
+        <NavItem
+          active={false}
+          disabled={false}>
+          Home
+        </NavItem>
+      </IndexLinkContainer>
+      <LinkContainer
+        action="push"
+        onlyActiveOnIndex={false}
+        to="/login">
+        <NavItem
+          active={false}
+          disabled={false}>
+          Login
+        </NavItem>
+      </LinkContainer>
+    </Nav>
+  </div>
+  <div
+    className="App-content" />
+</div>
+`;

@@ -1,9 +1,9 @@
 import React from 'react';
 
-import App from './App';
+import LoginPage from './LoginPage';
 
 it('Matches latest snapshot', () => {
-  const element = render(<App />)
+  const element = render(<LoginPage />)
 
   expect(element).toMatchSnapshot()
 });
