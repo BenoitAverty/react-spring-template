@@ -1,7 +1,7 @@
-
 const LOGIN_REQUEST = 'LOGIN_REQUEST'
 const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 const LOGIN_FAILURE = 'LOGIN_FAILURE'
+const LOGOUT = 'LOGOUT'
 
 const loginRequest = () => ({
   type: LOGIN_REQUEST,
@@ -44,6 +44,10 @@ export function login({ username, password }) {
   }
 }
 
+export const logout = () => ({
+  type: LOGOUT
+})
+
 const initialState = {
   username: '',
 }
@@ -68,6 +72,8 @@ export default function authReducer(state = initialState, action) {
         loginInProgress: false,
         loginError: action.payload,
       }
+    case LOGOUT:
+      return {...initialState}
     default:
       return state;
   }

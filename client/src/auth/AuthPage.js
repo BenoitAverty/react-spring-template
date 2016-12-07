@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-import {login} from './authReducer'
+import {login, logout} from './authReducer'
 
 import LoginForm from './LoginForm'
 import LoggedInWidget from './LoggedInWidget'
@@ -15,7 +15,8 @@ function AuthPage(props) {
            />
   }
   else {
-    return <LoggedInWidget />
+    return <LoggedInWidget
+      username={props.username} onLogout={props.onLogout} />
   }
 }
 
@@ -25,7 +26,8 @@ const mapStateToProps = ({ username, loginInProgress }) => ({
 })
 function mapDispatchToProps(dispatch) {
   return {
-    onSubmit: credentials => dispatch(login(credentials))
+    onSubmit: credentials => dispatch(login(credentials)),
+    onLogout: () => dispatch(logout())
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(AuthPage)
