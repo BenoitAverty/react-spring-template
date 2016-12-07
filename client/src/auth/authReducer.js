@@ -45,7 +45,7 @@ export function login({ username, password }) {
 }
 
 const initialState = {
-  anonymous: true,
+  username: '',
 }
 export default function authReducer(state = initialState, action) {
   switch (action.type) {
@@ -57,7 +57,6 @@ export default function authReducer(state = initialState, action) {
     case LOGIN_SUCCESS:
       return {
         ...state,
-        anonymous: false,
         username: action.payload.username,
         token: action.payload.token,
         loginInProgress: false,
