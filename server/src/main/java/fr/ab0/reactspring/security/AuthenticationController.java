@@ -46,7 +46,7 @@ public class AuthenticationController {
         final String token = jwtTokenUtil.generateToken(userDetails);
 
         // Return the token
-        return ResponseEntity.ok(new JwtAuthenticationResponse(token));
+        return ResponseEntity.ok(new JwtAuthenticationResponse(token, authenticationRequest.getUsername()));
     }
 
     @GetMapping("${jwt.route.authentication.refresh_path}")
@@ -57,7 +57,7 @@ public class AuthenticationController {
 
         if (!jwtTokenUtil.isTokenExpired(token)) {
             String refreshedToken = jwtTokenUtil.refreshToken(token);
-            return ResponseEntity.ok(new JwtAuthenticationResponse(refreshedToken));
+            return ResponseEntity.ok(new JwtAuthenticationResponse(refreshedToken, username));
         } else {
             return ResponseEntity.badRequest().body(null);
         }

@@ -1,7 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {createStore} from 'redux'
+import {createStore, applyMiddleware} from 'redux'
 import {Provider} from 'react-redux'
+import thunkMiddleWare from 'redux-thunk'
 import {Router, Route, IndexRoute, browserHistory} from 'react-router'
 
 import {App, HomePage} from './app'
@@ -11,7 +12,7 @@ import './index.css'
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
 
-const store = createStore(authReducer)
+const store = createStore(authReducer, applyMiddleware(thunkMiddleWare))
 
 ReactDOM.render(
   <Provider store={store}>

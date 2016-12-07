@@ -1,6 +1,8 @@
 import React from 'react'
-
 import {Form, FormGroup, FormControl, ControlLabel, Button, Col} from 'react-bootstrap'
+import {connect} from 'react-redux'
+
+import {login} from './authReducer'
 
 import './AuthPage.css'
 
@@ -10,10 +12,8 @@ class AuthPage extends React.Component {
     super()
 
     this.state = {
-      loading: false,
       username: '',
       password: '',
-      errors: [],
     }
   }
 
@@ -23,10 +23,13 @@ class AuthPage extends React.Component {
 
   onSubmit(e) {
     e.preventDefault()
-    console.debug(`Submitting login : ${this.state.username}/${this.state.password}`)
+    this.props.onSubmit({
+      username: this.state.username,
+      password: this.state.password
+    })
   }
 
-  render(props) {
+  render() {
     return (
       <div>
         <Form horizontal className="Login-form">
@@ -40,11 +43,24 @@ class AuthPage extends React.Component {
             <Col sm={10}><FormControl type="text" value={this.state.password}
               onChange={e => this.onChange('password', e.target.value)} /></Col>
           </FormGroup>
-          <Button bsStyle="primary" type="submit" onClick={e => this.onSubmit(e)}>Login</Button>
+          <Button bsStyle="primary" type="submit" onClick={e => this.onSubmit(e)}>
+            Login
+          </Button>
         </Form>
+        <p>props : {JSON.stringify(this.props)}</p>
       </div>
     )
   }
 }
 
-export default AuthPage;
+const mapStateToProps = ({ anonymous, username, loginInProgress }) => ({
+  anonymous,
+  username,
+  loginInProgress
+})
+function mapDispatchToProps(dispatch) {
+  return {
+    onSubmit: credentials => dispatch(login(credentials))
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(AuthPage)
