@@ -1,8 +1,11 @@
+// Action types handled by this reducer
 const LOGIN_REQUEST = 'LOGIN_REQUEST'
 const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 const LOGIN_FAILURE = 'LOGIN_FAILURE'
 const LOGOUT = 'LOGOUT'
+export const actionTypes = {LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT}
 
+// Action creators
 const loginRequest = () => ({
   type: LOGIN_REQUEST,
 })
@@ -24,7 +27,7 @@ export function login({ username, password }) {
       method: 'POST',
       body: JSON.stringify({username, password}),
       headers: {
-        "Content-Type": 'application/json'
+        'Content-Type': 'application/json'
       }
     })
       .then(function(response) {
@@ -34,11 +37,11 @@ export function login({ username, password }) {
         return response.json()
       })
       .then(function(body) {
-        console.debug('Received response')
+        console.log('Received response')
         dispatch(loginSuccess(body))
       })
       .catch(function(error) {
-        console.debug('caught error : ' + error.message)
+        console.log('caught error : ' + error.message)
         dispatch(loginFailure(error.message))
       })
   }
@@ -48,6 +51,7 @@ export const logout = () => ({
   type: LOGOUT
 })
 
+// Reducer
 const initialState = {
   username: '',
 }
