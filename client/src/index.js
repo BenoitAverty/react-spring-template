@@ -1,27 +1,27 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {createStore, applyMiddleware} from 'redux'
+import {createStore, applyMiddleware, compose} from 'redux'
 import {Provider} from 'react-redux'
 import thunkMiddleWare from 'redux-thunk'
-import {Router, Route, IndexRoute, browserHistory} from 'react-router'
+import {Router, browserHistory} from 'react-router'
 
-import {App, HomePage} from './app'
+import routes from './router/routes'
+import {App, HomePage} from './core'
 import {AuthPage, authReducer} from './auth'
 
 import './index.css'
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
 
-const store = createStore(authReducer, applyMiddleware(thunkMiddleWare))
+
+const devCompose = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+const store = createStore(
+  authReducer, devCompose(applyMiddleware(thunkMiddleWare))
+)
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={browserHistory}>
-      <Route path="/" component={App}>
-        <IndexRoute component={HomePage} />
-        <Route path="/login" component={AuthPage} />
-      </Route>
-    </Router>
+    <Router history={browserHistory} routes={routes} />
   </Provider>,
   document.getElementById('root')
 );
