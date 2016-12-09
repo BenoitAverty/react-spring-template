@@ -79,3 +79,34 @@ describe('login action creator', () => {
       })
   })
 })
+
+describe('auth reducer', () => {
+  it('Returns the initial state when called with undefined', () => {
+    const expectedState = { username: '' }
+    const actualState = authReducer(undefined, {type: ''})
+
+    expect(actualState).toEqual(expectedState)
+  })
+
+  it('Sets the "loginInProgress" flag to "true" when receiving a LOGIN_REQUEST action', () => {
+    const initialState = {}
+    const expectedState = { loginInProgress: true }
+    const actualState = authReducer(initialState, loginRequest())
+
+    expect(actualState).toEqual(expectedState)
+  })
+
+  it('Sets the username and token from the server when receiving a LOGIN_SUCCESS action', () => {
+    const initialState = { loginInProgress: true }
+    const serverResponse = { username: 'username', token: 'token' }
+    const expectedState = {
+      loginError: false,
+      loginInProgress: false,
+      username: 'username',
+      token: 'token'
+    }
+    const actualState = authReducer(initialState, loginSuccess(serverResponse))
+
+    expect(actualState).toEqual(expectedState)
+  })
+})
