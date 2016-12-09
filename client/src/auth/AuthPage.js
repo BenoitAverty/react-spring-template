@@ -10,7 +10,7 @@ import './AuthPage.css'
 function AuthPage(props) {
   if (props.username === '') {
     return <LoginForm
-      onSubmit={props.onSubmit}
+      onSubmit={props.onLogin}
       disabled={props.loginInProgress}
            />
   }
@@ -26,7 +26,7 @@ const mapStateToProps = ({ username, loginInProgress }) => ({
 })
 function mapDispatchToProps(dispatch) {
   return {
-    onSubmit: credentials => dispatch(login(credentials)),
+    onLogin: credentials => dispatch(login(credentials)),
     onLogout: () => dispatch(logout())
   }
 }

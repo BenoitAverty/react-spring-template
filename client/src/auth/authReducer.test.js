@@ -109,4 +109,20 @@ describe('auth reducer', () => {
 
     expect(actualState).toEqual(expectedState)
   })
+
+  it('Sets the error received in the state when receiving a LOGIN_FAILURE action', () => {
+    const initialState = { loginInProgress: true }
+    const expectedState = { loginInProgress: false, loginError: 403 }
+    const actualState = authReducer(initialState, loginFailure(403))
+
+    expect(actualState).toEqual(expectedState)
+  })
+
+  it('Resets the initial state when receiving a LOGOUT action', () => {
+    const initialState = { username: 'user', token: 'tok' }
+    const expectedState = { username: '' }
+    const actualState = authReducer(initialState, logout())
+
+    expect(actualState).toEqual(expectedState)
+  })
 })
