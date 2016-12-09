@@ -6,16 +6,16 @@ const LOGOUT = 'LOGOUT'
 export const actionTypes = {LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT}
 
 // Action creators
-const loginRequest = () => ({
+export const loginRequest = () => ({
   type: LOGIN_REQUEST,
 })
 
-const loginSuccess = ({username, token}) => ({
+export const loginSuccess = ({username, token}) => ({
   type: LOGIN_SUCCESS,
   payload: {username, token},
 })
 
-const loginFailure = err => ({
+export const loginFailure = err => ({
   type: LOGIN_FAILURE,
   payload: err,
 })
@@ -23,7 +23,7 @@ const loginFailure = err => ({
 export function login({ username, password }) {
   return function(dispatch) {
     dispatch(loginRequest())
-    fetch('/api/authenticate', {
+    return fetch('/api/authenticate', {
       method: 'POST',
       body: JSON.stringify({username, password}),
       headers: {
@@ -37,7 +37,7 @@ export function login({ username, password }) {
         return response.json()
       })
       .then(function(body) {
-        console.log('Received response')
+        console.log('Received response : ' + body)
         dispatch(loginSuccess(body))
       })
       .catch(function(error) {
