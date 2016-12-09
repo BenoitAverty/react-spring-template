@@ -16,6 +16,7 @@ const App = (props) => {
         <div className="App-menu">
           <Nav bsStyle="tabs">
             <IndexLinkContainer to="/"><NavItem>Home</NavItem></IndexLinkContainer>
+            <LinkContainer to="/greetings"><NavItem>Greetings (test the API)</NavItem></LinkContainer>
             <LinkContainer to="/login"><NavItem>Login</NavItem></LinkContainer>
           </Nav>
         </div>
