@@ -42,7 +42,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .authorizeRequests()
                 .antMatchers("/static/**").permitAll() // Allow anyone to access static assets
                 .antMatchers("/api/"+authPath).permitAll() // Allow anyone to make an auth attempt
-                .antMatchers("/api/**").authenticated(); // The rest of the API is authenticated.
+                .anyRequest().permitAll(); // Permit all and secure by endpoint
 
         http.addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
 
