@@ -1,10 +1,13 @@
-import {createStore, compose, applyMiddleware} from 'redux'
+import {createStore, compose, applyMiddleware, combineReducers} from 'redux'
 import thunkMiddleWare from 'redux-thunk'
-import {authReducer} from '../auth'
+import {authReducer as auth} from '../auth'
+import {greetingsReducer as greetings} from '../greetings'
+
+const reducer = combineReducers({ greetings, auth })
 
 const devCompose = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const store = createStore(
-  authReducer, devCompose(applyMiddleware(thunkMiddleWare))
+  reducer, devCompose(applyMiddleware(thunkMiddleWare))
 )
 
 export default store

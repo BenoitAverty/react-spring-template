@@ -5,7 +5,7 @@
   "devDependencies": {
     "nock": "^9.0.2",
     "react-addons-test-utils": "^15.4.1",
-    "react-scripts": "^0.8.3"
+    "react-scripts": "^0.8.4"
   },
   "dependencies": {
     "bootstrap": "3",

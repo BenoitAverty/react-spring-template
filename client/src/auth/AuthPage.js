@@ -20,7 +20,7 @@ function AuthPage(props) {
   }
 }
 
-const mapStateToProps = ({ username, loginInProgress }) => ({
+const mapStateToProps = ({auth: { username, loginInProgress }}) => ({
   username,
   loginInProgress
 })
