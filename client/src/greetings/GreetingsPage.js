@@ -6,34 +6,68 @@ import {getGreetings} from './greetingsReducer'
 
 import './GreetingsPage.css'
 
-export const Greetings = (props) => (
-  <div className="Greetings">
-    <h2>Api test</h2>
-    <Row>
-      <Col sm={3}>
-        <ControlLabel>GET /api/greetings</ControlLabel>
-        <Button bsStyle="primary" onClick={props.getGreetings}>Perform request</Button>
-      </Col>
-      <Col sm={9}>
-        <FormGroup>
-          <ControlLabel>Server response</ControlLabel>
-          <FormControl componentClass="textarea" value={props.simpleGreetingsResponse} />
-        </FormGroup>
-      </Col>
-    </Row>
-  </div>
-)
+export class GreetingsPage extends React.Component {
+  constructor() {
+    super()
 
+    this.state = {
+      namedGreetingsParameter: ''
+    }
+  }
+
+  handleNameChange(event) {
+    this.setState({ namedGreetingsParameter: event.target.value })
+  }
+
+  render() {
+    return (
+      <div className="Greetings">
+        <h2>Api test</h2>
+        <Row>
+          <Col sm={4}>
+            <ControlLabel>GET /api/greetings</ControlLabel>
+            <Button bsStyle="primary" onClick={() => this.props.getGreetings()}>Perform request</Button>
+          </Col>
+          <Col sm={8}>
+            <FormGroup>
+              <ControlLabel>Server response</ControlLabel>
+              <FormControl componentClass="textarea" value={this.props.simpleGreetingsResponse} />
+            </FormGroup>
+          </Col>
+        </Row>
+        <Row>
+          <Col sm={4}>
+            <ControlLabel>GET /api/greetings/{'{name}'}</ControlLabel>
+            <FormControl type="text" placeholder="{name}" value={this.state.namedGreetingsParameter} onChange={this.handleNameChange.bind(this)} />
+            <Button
+              bsStyle="primary"
+              onClick={() => this.props.getGreetings(this.state.namedGreetingsParameter)}
+              disabled={!this.state.namedGreetingsParameter}
+            >
+              Perform request
+            </Button>
+          </Col>
+          <Col sm={8}>
+            <FormGroup>
+              <ControlLabel>Server response</ControlLabel>
+              <FormControl componentClass="textarea" value={this.props.namedGreetingsResponse} />
+            </FormGroup>
+          </Col>
+        </Row>
+      </div>
+    )
+  }
+}
 
 function mapStateToProps(state) {
   return {
-    simpleGreetingsResponse: state.greetings.simpleGreetingsResponse
+    simpleGreetingsResponse: state.greetings.simpleGreetingsResponse,
+    namedGreetingsResponse: state.greetings.namedGreetingsResponse
   }
 }
-
 function mapDispatchToProps(dispatch) {
   return {
-    getGreetings: () => dispatch(getGreetings())
+    getGreetings: param => dispatch(getGreetings(param))
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Greetings)
+export default connect(mapStateToProps, mapDispatchToProps)(GreetingsPage)
