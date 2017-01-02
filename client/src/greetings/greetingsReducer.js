@@ -1,3 +1,5 @@
+import {fetch} from '../core/http'
+
 const SIMPLE_GREETINGS_RESULT = 'SIMPLE_GREETINGS_RESULT'
 const NAMED_GREETINGS_RESULT = 'NAMED_GREETINGS_RESULT'
 

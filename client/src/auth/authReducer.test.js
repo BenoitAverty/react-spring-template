@@ -5,10 +5,13 @@ import authReducer, {login, loginRequest, loginSuccess, loginFailure, logout, ac
 
 describe('logout action creator', () => {
   it('returns a correct logout action', () => {
-    const expected = { type: actionTypes.LOGOUT }
-    const actual = logout()
+    const dispatchMock = jest.fn()
+    const logoutThunk = logout()
 
-    expect(actual).toEqual(expected)
+    const expected = { type: actionTypes.LOGOUT }
+
+    logoutThunk(dispatchMock)
+    expect(dispatchMock).toBeCalledWith({ type: actionTypes.LOGOUT })
   })
 })
 
@@ -96,14 +99,13 @@ describe('auth reducer', () => {
     expect(actualState).toEqual(expectedState)
   })
 
-  it('Sets the username and token from the server when receiving a LOGIN_SUCCESS action', () => {
+  it('Sets the username from the server when receiving a LOGIN_SUCCESS action', () => {
     const initialState = { loginInProgress: true }
     const serverResponse = { username: 'username', token: 'token' }
     const expectedState = {
       loginError: false,
       loginInProgress: false,
-      username: 'username',
-      token: 'token'
+      username: 'username'
     }
     const actualState = authReducer(initialState, loginSuccess(serverResponse))
 
@@ -121,7 +123,7 @@ describe('auth reducer', () => {
   it('Resets the initial state when receiving a LOGOUT action', () => {
     const initialState = { username: 'user', token: 'tok' }
     const expectedState = { username: '' }
-    const actualState = authReducer(initialState, logout())
+    const actualState = authReducer(initialState, { type: actionTypes.LOGOUT })
 
     expect(actualState).toEqual(expectedState)
   })

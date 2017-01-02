@@ -1,3 +1,5 @@
+import { fetch, setAuthToken } from '../core/http'
+
 // Action types handled by this reducer
 const LOGIN_REQUEST = 'LOGIN_REQUEST'
 const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
@@ -38,6 +40,7 @@ export function login({ username, password }) {
       })
       .then(function(body) {
         console.log('Received response : ' + body)
+        setAuthToken(body.token)
         dispatch(loginSuccess(body))
       })
       .catch(function(error) {
@@ -47,9 +50,14 @@ export function login({ username, password }) {
   }
 }
 
-export const logout = () => ({
-  type: LOGOUT
-})
+export function logout() {
+  return function(dispatch) {
+    setAuthToken(null)
+    dispatch({
+      type: LOGOUT
+    })
+  }
+}
 
 // Reducer
 const initialState = {
@@ -66,7 +74,6 @@ export default function authReducer(state = initialState, action) {
       return {
         ...state,
         username: action.payload.username,
-        token: action.payload.token,
         loginInProgress: false,
         loginError: false,
       }
