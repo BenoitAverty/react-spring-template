@@ -6,3 +6,6 @@ jwt:
     authentication:
       path: /authenticate
       refresh_path: /auth_refresh
+logging:
+  level:
+    org.springframework.web: DEBUG

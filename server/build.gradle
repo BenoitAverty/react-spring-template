@@ -25,7 +25,6 @@ repositories {
 	mavenCentral()
 }
 
-
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-hateoas')
 	compile('org.springframework.boot:spring-boot-starter-security')
@@ -35,3 +34,10 @@ dependencies {
 	compile('org.projectlombok:lombok')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
+
+task copyClient(type: Copy) {
+	from '../client/build'
+	into 'build/resources/main/static'
+}
+
+bootRepackage.dependsOn copyClient
